@@ -1,0 +1,51 @@
+﻿---
+BasedOnStyle: LLVM
+AccessModifierOffset: "-2"
+AlignAfterOpenBracket: Align
+AlignConsecutiveMacros: "true"
+AlignConsecutiveAssignments: "true"
+AlignConsecutiveDeclarations: "true"
+AlignEscapedNewlines: Right
+AlignOperands: "true"
+AlignTrailingComments: "true"
+AllowShortBlocksOnASingleLine: "true"
+AllowShortCaseLabelsOnASingleLine: "true"
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: Always
+AllowShortLambdasOnASingleLine: All
+AllowShortLoopsOnASingleLine: "true"
+AlwaysBreakAfterReturnType: None
+AlwaysBreakBeforeMultilineStrings: "false"
+AlwaysBreakTemplateDeclarations: "Yes"
+BinPackArguments: "false"
+BinPackParameters: "false"
+BreakBeforeBraces: Allman
+BreakBeforeTernaryOperators: "true"
+BreakConstructorInitializers: BeforeComma
+BreakInheritanceList: BeforeComma
+BreakStringLiterals: "true"
+ColumnLimit: "80"
+ConstructorInitializerAllOnOneLineOrOnePerLine: "false"
+IndentCaseLabels: "true"
+IndentWidth: "4"
+Language: Cpp
+PointerAlignment: Left
+IncludeCategories:
+    # Headers in <> with .h extension.
+    - Regex: '<([A-Za-z0-9\/-_])+\.h>'
+      Priority: 10
+    # Headers in <> with .hpp extension.
+    - Regex: '<([A-Za-z0-9\/-_])+\.hpp>'
+      Priority: 20
+    # Headers in <> without extension.
+    - Regex: '<([A-Za-z0-9\/-_])+>'
+      Priority: 30
+SortUsingDeclarations: "true"
+SpaceAfterTemplateKeyword: "true"
+SpaceBeforeAssignmentOperators: "true"
+SpaceBeforeCpp11BracedList: "true"
+SpaceBeforeCtorInitializerColon: "true"
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: "true"
+SpacesInContainerLiterals: "true"
+Standard: Auto
