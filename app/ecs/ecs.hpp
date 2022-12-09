@@ -91,7 +91,7 @@ struct registry_t final
     }
 
     template <components::Component... Ts>
-    bool dettach(const entity_t target)
+    bool dettach(const entity_t target) &
     {
         if (!m_entities.contains(target)) { return false; }
 
@@ -100,7 +100,7 @@ struct registry_t final
     }
 
     template <components::Component C>
-    std::vector<utils::non_owning_ptr_t<C>> all()
+    std::vector<utils::non_owning_ptr_t<C>> all() &
     {
         std::vector<utils::non_owning_ptr_t<C>> acc {};
         constexpr var COMPONENT_ID = components::id_of<C, T>();
@@ -116,7 +116,7 @@ struct registry_t final
 
     template <components::Component... Types,
               components::Component... Exclusions>
-    std::vector<entity_t> query(Exclusions... /*unused*/)
+    std::vector<entity_t> query(Exclusions... /*unused*/) &
     {
         std::vector<std::reference_wrapper<std::variant<Types...>>> acc {};
         for (var & [ entity, comps ] : m_entities)
@@ -131,7 +131,7 @@ struct registry_t final
     }
 
   private:
-    std::optional<entity_t> find_unused()
+    std::optional<entity_t> find_unused() &
     {
         if (m_index.empty()) { return {}; }
 
