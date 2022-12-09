@@ -17,12 +17,12 @@ struct app_t final
     state::state_tracker_t states {};
 
     ecs::registry_t<app_t,
-                    components::player_t,
-                    components::jump_pad_t,
-                    components::transform_t,
-                    components::collider_t,
-                    components::item_t,
-                    components::button_t<app_t>>
+                    ecs::components::player_t,
+                    ecs::components::jump_pad_t,
+                    ecs::components::transform_t,
+                    ecs::components::collider_t,
+                    ecs::components::item_t,
+                    ecs::components::button_t<app_t>>
         entities {};
 
     std::unordered_map<resources::texture_id_t, sf::Texture> textures {};

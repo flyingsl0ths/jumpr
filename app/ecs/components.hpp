@@ -5,7 +5,7 @@
 #include <common.hpp>
 #include <utils/vec2.hpp>
 
-namespace jumpr::components
+namespace jumpr::ecs::components
 {
 
 enum class component_id_t : u8
