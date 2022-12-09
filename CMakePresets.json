@@ -1,0 +1,116 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 25,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "default",
+      "description": "Default build configuration using Ninja",
+      "generator": "Ninja",
+      "binaryDir": "build/default"
+    },
+    {
+      "name": "ninja-clang",
+      "description": "Base configuration using Ninja / clang",
+      "inherits": "default",
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "clang++"
+      }
+    },
+    {
+      "name": "nc-debug",
+      "description": "Debug build using Ninja/clang",
+      "binaryDir": "build/db",
+      "inherits": "ninja-clang",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_CXX_INCLUDE_WHAT_YOU_USE": "include-what-you-use"
+      }
+    },
+    {
+      "name": "nc-release",
+      "description": "Release build using Ninja/clang",
+      "inherits": "ninja-clang",
+      "binaryDir": "build/rl",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "nc-relw",
+      "description": "RelWithDebInfo build using Ninja/clang",
+      "inherits": "ninja-clang",
+      "binaryDir": "build/rw",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    },
+    {
+      "name": "nc-ubsan",
+      "description": "UBsan debug build using Ninja/clang",
+      "inherits": "nc-debug",
+      "binaryDir": "build/ubsan",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_CXX_FLAGS": "-fsanitize=undefined"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "default",
+      "configurePreset": "default"
+    },
+    {
+      "name": "ninja-clang",
+      "configurePreset": "ninja-clang"
+    },
+    {
+      "name": "nc-debug",
+      "configurePreset": "nc-debug"
+    },
+    {
+      "name": "nc-release",
+      "configurePreset": "nc-release"
+    },
+    {
+      "name": "nc-relw",
+      "configurePreset": "nc-relw"
+    },
+    {
+      "name": "nc-ubsan",
+      "configurePreset": "nc-ubsan"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "default",
+      "configurePreset": "default"
+    },
+    {
+      "name": "ninja-clang",
+      "configurePreset": "ninja-clang"
+    },
+    {
+      "name": "nc-debug",
+      "configurePreset": "nc-debug"
+    },
+    {
+      "name": "nc-release",
+      "configurePreset": "nc-release"
+    },
+    {
+      "name": "nc-relw",
+      "configurePreset": "nc-relw"
+    },
+    {
+      "name": "nc-ubsan",
+      "configurePreset": "nc-ubsan"
+    }
+  ]
+}
