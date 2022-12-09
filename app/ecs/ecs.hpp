@@ -23,7 +23,7 @@ struct registry_t final
 
   public:
     template <components::Component... C>
-    [[maybe_unused]] std::optional<entity_t> create() & noexcept
+    [[maybe_unused]] std::optional<entity_t> create() &
     {
         const var unused = find_unused();
 
@@ -43,7 +43,7 @@ struct registry_t final
         return entity;
     }
 
-    void remove(const entity_t target) & noexcept
+    void remove(const entity_t target) &
     {
         if (!m_entities.contains(target)) { return; }
 
@@ -54,7 +54,7 @@ struct registry_t final
 
     template <components::Component C>
     [[nodiscard]] std::optional<utils::non_owning_ptr_t<C>>
-    get(const entity_t target) & noexcept
+    get(const entity_t target) &
     {
         constexpr var COMPONENT_ID = components::id_of<C, T>();
 
