@@ -29,7 +29,7 @@ struct vec2_t final
         return vec2_t {x - other.x, y - other.y};
     }
 
-    [[maybe_unused]] vec2_t& operator-=(const vec2_t other) noexcept
+    [[maybe_unused]] vec2_t& operator-=(vec2_t const& other) noexcept
     {
         x -= other.x;
         y -= other.y;
