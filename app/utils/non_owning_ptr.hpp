@@ -39,7 +39,4 @@ struct non_owning_ptr_t final
     T* m_ptr;
 };
 
-template <typename T>
-non_owning_ptr_t(T*) -> non_owning_ptr_t<T>;
-
 } // namespace utils
