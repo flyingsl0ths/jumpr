@@ -5,12 +5,14 @@ list(APPEND ECS "ecs/ecs.hpp" "ecs/components.hpp")
 list(APPEND RESOURCES "resources/utils.hpp" "resources/textures.hpp"
      "resources/audio.hpp")
 
-list(APPEND UTILS "utils/vec2.hpp" "utils/non_owning_ptr.hpp" "utils/timer.hpp")
+list(APPEND UTILS "utils/exit_codes.hpp" "utils/non_owning_ptr.hpp"
+     "utils/timer.hpp" "utils/vec2.hpp")
 
 list(
   APPEND
   GAME
   "game/game.hpp"
+  "game/game.cpp"
   "game/state.hpp"
   "game/systems.hpp"
   "game/systems.cpp"
@@ -26,4 +28,4 @@ target_sources(${PROJECT_NAME} PRIVATE ${ECS} ${RESOURCES} ${UTILS} ${GAME})
 target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_SOURCE_DIR}/app")
 
 target_link_libraries(${PROJECT_NAME} PRIVATE compile-options sfml-graphics
-                                              sfml-window sfml-system)
+                                              sfml-window sfml-system sfml-audio)

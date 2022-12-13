@@ -29,7 +29,7 @@ target_compile_options(
 
 target_compile_features(compile-options INTERFACE cxx_std_20)
 
-find_package(SFML 2.5 QUIET COMPONENTS graphics window system)
+find_package(SFML 2.5 QUIET COMPONENTS graphics window system audio)
 
 if(NOT SFML_FOUND)
   message(STATUS "SFML not found locally, fetching SFML...")
