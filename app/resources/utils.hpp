@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <memory>
 #include <optional>
+#include <string>
 #include <type_traits>
 #include <unordered_map>
 #include <utility>
@@ -31,7 +32,7 @@ requires requires
         } -> std::same_as<bool>;
 }
 std::optional<std::unordered_map<I, std::unique_ptr<R>>>
-load_all_resources(str const directory)
+load_all_resources(std::string const& directory)
 {
     using resource_t = std::unique_ptr<R>;
 

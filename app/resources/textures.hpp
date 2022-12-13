@@ -21,7 +21,7 @@ enum class [[nodiscard]] texture_id_t : u8 {BUTTON,
 
 using Textures = std::unordered_map<texture_id_t, std::unique_ptr<sf::Texture>>;
 
-inline std::optional<Textures> load_all_textures(str const directory)
+inline std::optional<Textures> load_all_textures(std::string const& directory)
 {
     return load_all_resources<texture_id_t, sf::Texture>(directory);
 }

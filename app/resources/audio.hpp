@@ -27,12 +27,12 @@ struct track_t final
 using Sounds = std::unordered_map<sound_id_t, std::unique_ptr<sf::SoundBuffer>>;
 using Tracks = std::unordered_map<track_id_t, std::unique_ptr<track_t>>;
 
-inline std::optional<Sounds> load_all_sounds(str const directory)
+inline std::optional<Sounds> load_all_sounds(std::string const& directory)
 {
     return load_all_resources<sound_id_t, sf::SoundBuffer>(directory);
 }
 
-inline std::optional<Tracks> load_all_music(str const directory)
+inline std::optional<Tracks> load_all_music(std::string const& directory)
 {
     return load_all_resources<track_id_t, track_t>(directory);
 }
