@@ -9,7 +9,7 @@ std::optional<str> load_resources(app_t& instance, std::string const& root_dir)
 {
     if (instance.m_loaded_resources)
     {
-        return {"All resources have been loaded"};
+        return "All resources have been loaded";
     }
 
     instance.m_loaded_resources = true;

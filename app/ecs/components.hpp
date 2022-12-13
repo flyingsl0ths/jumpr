@@ -104,4 +104,4 @@ constexpr auto id_of() noexcept
     }
 }
 
-} // namespace jumpr::components
+} // namespace jumpr::ecs::components
