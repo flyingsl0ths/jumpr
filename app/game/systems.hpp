@@ -22,8 +22,9 @@ using system_t = void (*)(jumpr::game::app_t&);
 struct systems_t final
 {
     std::array<system_t, 4UL> current {};
+    std::optional<system_t>   draw_previous {};
 };
 
-systems_t dispatch(const jumpr::game::state::state_tracker_t& state);
+systems_t dispatch(jumpr::game::state::state_tracker_t const& state);
 
 } // namespace jumpr::game::systems

@@ -33,7 +33,7 @@ systems_t dispatch(jumpr::game::state::state_tracker_t const& state)
     if (state.previous && *state.previous == state::state_t::LEVEL &&
         current == state::state_t::PAUSED)
     {
-        return {.current = PAUSE, .previous = {LEVEL}};
+        return {.current = PAUSE, .draw_previous = LEVEL[3UL]};
     }
 
     switch (current)
