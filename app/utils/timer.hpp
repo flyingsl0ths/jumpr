@@ -12,15 +12,15 @@ using sec_t   = std::chrono::duration<f32>;
 
 struct delta_time_t final
 {
-    sec_t operator++() noexcept
+    void operator++() noexcept
     {
-        auto const now   = clock_t::now();
-        auto const delta = now - point;
-        point            = now;
-        return delta;
+        auto const now = clock_t::now();
+        tick           = now - point;
+        point          = now;
     }
 
     clock_t::time_point point = clock_t::now();
+    sec_t               tick {};
 };
 
 } // namespace utils
