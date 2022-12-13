@@ -1,6 +1,6 @@
 #include "systems.hpp"
 #include <common.hpp>
-#include <game/state.hpp>
+#include "state.hpp"
 #include "states/level.hpp"
 #include "states/pause.hpp"
 #include "states/title.hpp"
