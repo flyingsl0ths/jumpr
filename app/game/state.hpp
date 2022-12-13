@@ -24,7 +24,7 @@ struct state_tracker_t final
         previous = back;
     }
 
-    bool                   just_entered_state {};
+    bool                   just_entered_state {true};
     bool                   is_paused {};
     state_t                current {state_t::TITLE};
     std::optional<state_t> next {};
