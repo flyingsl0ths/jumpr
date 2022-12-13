@@ -27,8 +27,7 @@
       "inherits": "ninja-clang",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "CMAKE_CXX_INCLUDE_WHAT_YOU_USE": "include-what-you-use"
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       }
     },
     {
