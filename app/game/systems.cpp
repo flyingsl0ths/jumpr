@@ -5,18 +5,21 @@
 #include "states/pause.hpp"
 #include "states/title.hpp"
 
-constexpr std::array<jumpr::game::systems::system_t, 3UL> TITLE = {
+constexpr std::array<jumpr::game::systems::system_t, 4UL> TITLE = {
     jumpr::game::title::setup,
+    jumpr::game::title::handle_input,
     jumpr::game::title::update,
     jumpr::game::title::draw};
 
-constexpr std::array<jumpr::game::systems::system_t, 3UL> LEVEL = {
+constexpr std::array<jumpr::game::systems::system_t, 4UL> LEVEL = {
     jumpr::game::level::setup,
+    jumpr::game::title::handle_input,
     jumpr::game::level::update,
     jumpr::game::level::draw};
 
-constexpr std::array<jumpr::game::systems::system_t, 3UL> PAUSE = {
+constexpr std::array<jumpr::game::systems::system_t, 4UL> PAUSE = {
     jumpr::game::pause::setup,
+    jumpr::game::title::handle_input,
     jumpr::game::pause::update,
     jumpr::game::pause::draw};
 
