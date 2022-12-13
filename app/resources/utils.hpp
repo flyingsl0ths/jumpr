@@ -35,6 +35,8 @@ load_all_resources(str const directory)
 {
     using resource_t = std::unique_ptr<R>;
 
+    if (!fs::exists(directory)) { return {}; }
+
     const var resource_dir = fs::path(directory);
 
     std::underlying_type_t<I> resource_id {};
