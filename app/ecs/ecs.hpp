@@ -38,7 +38,10 @@ struct registry_t final
                 components::id_of<C, T>(), {C {}})...};
         }
 
-        else { m_entities[entity] = {}; }
+        else
+        {
+            m_entities[entity] = {};
+        }
 
         return entity;
     }
