@@ -25,7 +25,7 @@ struct registry_t final
     template <components::Component... C>
     [[maybe_unused]] std::optional<entity_t> create() &
     {
-        const var unused = find_unused();
+        const auto unused = find_unused();
 
         const entity_t entity = unused ? *unused : m_ids++;
 
@@ -38,10 +38,7 @@ struct registry_t final
                 components::id_of<C, T>(), {C {}})...};
         }
 
-        else
-        {
-            m_entities[entity] = {};
-        }
+        else { m_entities[entity] = {}; }
 
         return entity;
     }
@@ -59,7 +56,7 @@ struct registry_t final
     [[nodiscard]] std::optional<utils::non_owning_ptr_t<C>>
     get(const entity_t target) &
     {
-        constexpr var COMPONENT_ID = components::id_of<C, T>();
+        constexpr auto COMPONENT_ID = components::id_of<C, T>();
 
         return !(m_entities.contains(target) &&
                  m_entities[target].contains(COMPONENT_ID))
@@ -68,11 +65,12 @@ struct registry_t final
     }
 
     template <components::Component... Ts>
-    requires(sizeof...(Ts) > 1) void attach(const entity_t target) &
+        requires(sizeof...(Ts) > 1)
+    void attach(const entity_t target) &
     {
         if (!m_entities.contains(target)) { return; }
 
-        var& entity = m_entities[target];
+        auto& entity = m_entities[target];
 
         (entity.insert(std::make_pair<components::component_id_t, Ts>(
              components::id_of<Ts, T>(), {Ts {}})),
@@ -84,7 +82,7 @@ struct registry_t final
     {
         if (!m_entities.contains(target)) { return; }
 
-        var& entity = m_entities[target];
+        auto& entity = m_entities[target];
 
         auto [it, _] =
             entity.insert(std::make_pair<components::component_id_t, C>(
@@ -106,8 +104,8 @@ struct registry_t final
     std::vector<utils::non_owning_ptr_t<C>> all() &
     {
         std::vector<utils::non_owning_ptr_t<C>> acc {};
-        constexpr var COMPONENT_ID = components::id_of<C, T>();
-        for (var & [ entity, comps ] : m_entities)
+        constexpr auto COMPONENT_ID = components::id_of<C, T>();
+        for (auto& [entity, comps] : m_entities)
         {
             if (comps.contains(COMPONENT_ID))
             {
@@ -122,7 +120,7 @@ struct registry_t final
     std::vector<entity_t> query(Exclusions... /*unused*/) &
     {
         std::vector<std::reference_wrapper<std::variant<Types...>>> acc {};
-        for (var & [ entity, comps ] : m_entities)
+        for (auto& [entity, comps] : m_entities)
         {
             if ((... || !comps.contains(components::id_of<Exclusions, T>)) &&
                 (... || comps.contains(components::id_of<Types, T>)))
@@ -138,7 +136,7 @@ struct registry_t final
     {
         if (m_index.empty()) { return {}; }
 
-        var const entity = *m_index.begin();
+        auto const entity = *m_index.begin();
 
         m_index.erase(entity);
 

@@ -28,7 +28,7 @@ namespace jumpr::game::systems
 
 systems_t dispatch(jumpr::game::state::state_tracker_t const& state)
 {
-    var const current = state.current;
+    auto const current = state.current;
 
     if (state.previous && *state.previous == state::state_t::LEVEL &&
         current == state::state_t::PAUSED)

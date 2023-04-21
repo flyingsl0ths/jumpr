@@ -38,17 +38,17 @@ load_all_resources(std::string const& directory)
 
     if (!fs::exists(directory)) { return {}; }
 
-    const var resource_dir = fs::path(directory);
+    const auto resource_dir = fs::path(directory);
 
     std::underlying_type_t<I> resource_id {};
 
     std::unordered_map<I, resource_t> resources {};
 
-    for (var const& resource : fs::directory_iterator(resource_dir))
+    for (auto const& resource : fs::directory_iterator(resource_dir))
     {
         if (static_cast<I>(resource_id) == I::MAX) { break; }
 
-        var res = std::make_unique<R>();
+        auto res = std::make_unique<R>();
 
         if (!res->loadFromFile(resource.path().string())) { return {}; }
 
