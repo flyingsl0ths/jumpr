@@ -20,14 +20,14 @@ s32 main(const s32 argc, const char** const argv)
 
     game::app_t instance {};
 
-    auto error_message = load_resources(instance, root_dir);
+    auto error_message = instance.load_resources(root_dir);
     if (error_message)
     {
         std::cerr << *error_message;
         return utils::EX_NOINPUT;
     }
 
-    run(instance);
+    instance.run();
 
     return utils::EX_OK;
 }

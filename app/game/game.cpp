@@ -5,14 +5,11 @@
 namespace jumpr::game
 {
 
-std::optional<str> load_resources(app_t& instance, std::string const& root_dir)
+std::optional<str> app_t::load_resources(std::string const& root_dir)
 {
-    if (instance.m_loaded_resources)
-    {
-        return "All resources have been loaded";
-    }
+    if (m_loaded_resources) { return "All resources have been loaded"; }
 
-    instance.m_loaded_resources = true;
+    m_loaded_resources = true;
 
     auto textures = resources::load_all_textures(root_dir + "data/textures");
     if (!textures) { return "Failed to load textures!\n"; }
@@ -23,57 +20,58 @@ std::optional<str> load_resources(app_t& instance, std::string const& root_dir)
     auto sounds = resources::load_all_sounds(root_dir + "data/audio/sounds");
     if (!sounds) { return "Failed to load sounds!\n"; }
 
-    instance.m_textures = std::move(*textures);
-    instance.m_sounds   = std::move(*sounds);
-    instance.m_tracks   = std::move(*tracks);
+    m_textures = std::move(*textures);
+    m_sounds   = std::move(*sounds);
+    m_tracks   = std::move(*tracks);
 
     return {};
 }
 
-void run(app_t& instance)
+void app_t::run()
 {
-    auto& window = instance.m_window;
+    auto& window = m_window;
 
-    instance.m_timer = {};
-    auto& event      = instance.m_event;
+    m_timer     = {};
+    auto& event = m_event;
 
     while (window.isOpen())
     {
-        ++instance.m_timer;
+        if (m_quit_game) { break; }
 
-        auto const [current, draw_previous] =
-            systems::dispatch(instance.m_states);
+        ++m_timer;
+
+        const auto [current, draw_previous] = systems::dispatch(m_state);
 
         auto const [setup, handle_input, update, draw] = current;
 
-        if (instance.m_states.just_entered_state)
+        if (m_state.just_entered_state)
         {
-            setup(instance);
-            instance.m_states.just_entered_state = false;
+            setup(*this);
+            m_state.just_entered_state = false;
         }
 
         event = {};
 
         while (window.pollEvent(event))
         {
+            handle_input(*this);
             if (event.type == sf::Event::Closed) window.close();
-            handle_input(instance);
         }
 
-        update(instance);
+        update(*this);
 
         window.clear();
 
-        draw(instance);
+        draw(*this);
 
-        if (draw_previous) { (*draw_previous)(instance); }
+        if (draw_previous) { (*draw_previous)(*this); }
 
         window.display();
 
-        if (instance.m_states.next)
+        if (m_state.next)
         {
-            instance.m_states.current = *instance.m_states.next;
-            instance.m_states.next    = {};
+            m_state.current = *m_state.next;
+            m_state.next    = {};
         }
     }
 }

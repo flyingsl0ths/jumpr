@@ -18,10 +18,13 @@ namespace jumpr::game
 struct app_t final
 {
   public:
-    friend std::optional<str> load_resources(app_t&             instance,
-                                             std::string const& root_dir);
+    std::optional<str> load_resources(std::string const& root_dir);
 
-    friend void run(app_t& instance);
+    void run();
+
+    void quit_game(const bool quit = true) { m_quit_game = quit; }
+
+    sf::RenderWindow& get_window() { return m_window; }
 
     [[nodiscard]] ecs::registry_t<app_t,
                                   ecs::components::player_t,
@@ -30,7 +33,7 @@ struct app_t final
                                   ecs::components::collider_t,
                                   ecs::components::item_t,
                                   ecs::components::button_t<app_t>>&
-    registry() & noexcept
+    get_registry() & noexcept
     {
         return m_entities;
     }
@@ -39,14 +42,14 @@ struct app_t final
 
     [[nodiscard]] sf::Event get_event() & { return m_event; }
 
-    void next_state(state::state_t const next) { m_states.next = next; }
+    void next_state(state::state_t const next) { m_state.next = next; }
 
     void top_back_states(state::state_t const top, state::state_t const back)
     {
-        m_states.top_back(top, back);
+        m_state.top_back(top, back);
     }
 
-    void set_state(state::state_t const current) { m_states = current; }
+    void set_state(state::state_t const current) { m_state = current; }
 
     template <auto Id, typename R>
     requires((std::is_same_v<decltype(Id), resources::texture_id_t> &&
@@ -79,9 +82,11 @@ struct app_t final
     }
 
   private:
+    bool m_quit_game {};
+
     bool m_loaded_resources {};
 
-    state::state_tracker_t m_states {};
+    state::state_tracker_t m_state {};
 
     ecs::registry_t<app_t,
                     ecs::components::player_t,
