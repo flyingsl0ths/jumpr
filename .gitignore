@@ -35,4 +35,5 @@ build
 .cache
 .vscode
 compile_commands.json
+data
 .DS_Store

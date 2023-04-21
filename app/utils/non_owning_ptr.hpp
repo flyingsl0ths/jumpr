@@ -7,7 +7,7 @@ template <typename T>
 struct non_owning_ptr_t final
 {
   public:
-    non_owning_ptr_t(T* const value)
+    non_owning_ptr_t(T* const value = nullptr)
         : m_ptr {value}
     {
     }
